@@ -50,7 +50,7 @@ class ExperimentRunner(tune.Trainable):
             get_environment_from_params(environment_params['evaluation'])
             if 'evaluation' in environment_params
             else training_environment)
-
+        variant['sampler_params']['config']['max_path_length'] = training_environment.max_path_length
         variant['Q_params']['config'].update({
             'input_shapes': (
                 training_environment.observation_shape,

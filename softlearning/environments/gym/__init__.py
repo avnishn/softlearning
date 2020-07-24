@@ -11,7 +11,7 @@ import gym
 CUSTOM_GYM_ENVIRONMENTS_PATH = __package__
 MUJOCO_ENVIRONMENTS_PATH = f'{CUSTOM_GYM_ENVIRONMENTS_PATH}.mujoco'
 
-MUJOCO_ENVIRONMENT_SPECS = (
+MUJOCO_ENVIRONMENT_SPECS = [
     {
         'id': 'Swimmer-Parameterizable-v3',
         'entry_point': (f'gym.envs.mujoco.swimmer_v3:SwimmerEnv'),
@@ -61,7 +61,15 @@ MUJOCO_ENVIRONMENT_SPECS = (
         'entry_point': (f'{MUJOCO_ENVIRONMENTS_PATH}'
                         '.image_pusher_2d:BlindForkReacher2dEnv'),
     },
-)
+]
+
+from metaworld.envs.mujoco.env_dict import ALL_V1_ENVIRONMENTS
+for idx in ALL_V1_ENVIRONMENTS:
+    env = ALL_V1_ENVIRONMENTS[idx]
+    temp = {'id': idx,
+            'entry_point': f'metaworld.envs.mujoco.sawyer_xyz:{env.__name__}'}
+    MUJOCO_ENVIRONMENT_SPECS.append(temp)
+
 
 GENERAL_ENVIRONMENT_SPECS = (
     {

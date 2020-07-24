@@ -300,7 +300,6 @@ class RLAlgorithm(Checkpointable):
                            for episode_rewards in episodes_rewards]
         episodes_length = [episode_rewards.shape[0]
                            for episode_rewards in episodes_rewards]
-
         diagnostics = OrderedDict((
             ('episode-reward-mean', np.mean(episodes_reward)),
             ('episode-reward-min', np.min(episodes_reward)),

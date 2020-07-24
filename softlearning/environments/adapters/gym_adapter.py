@@ -11,7 +11,7 @@ from .softlearning_env import SoftlearningEnv
 from softlearning.environments.gym import register_environments
 from softlearning.environments.gym.wrappers import RescaleObservation
 from softlearning.utils.gym import is_continuous_space
-
+from metaworld.envs.mujoco.sawyer_xyz import *
 
 def parse_domain_task(gym_id):
     domain_task_parts = gym_id.split('-')
@@ -40,9 +40,7 @@ for gym_id in GYM_ENVIRONMENT_IDS:
 
 GYM_ENVIRONMENTS = dict(GYM_ENVIRONMENTS)
 
-
 DEFAULT_OBSERVATION_KEY = 'observations'
-
 
 class GymAdapter(SoftlearningEnv):
     """Adapter that implements the SoftlearningEnv for Gym envs."""
@@ -74,6 +72,15 @@ class GymAdapter(SoftlearningEnv):
             try:
                 env_id = f"{domain}-{task}"
                 env = gym.envs.make(env_id, **kwargs)
+                # tricks to make single task environments work
+                env._partially_observable = False
+                env._freeze_rand_vec = False
+                env._set_task_called = True
+                special = {'push-v1' : "push", 'reach-v1' : "reach", "pick-place-v1": "pick_place"}
+                if env_id in special:
+                    env._set_task_inner(task_type=special[env_id])
+                env.reset()
+                env._freeze_rand_vec = True
             except gym.error.UnregisteredEnv:
                 env_id = f"{domain}{task}"
                 env = gym.envs.make(env_id, **kwargs)
