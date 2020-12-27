@@ -225,7 +225,7 @@ class SoftlearningEnv(metaclass=ABCMeta):
         results = defaultdict(list)
         for path in paths:
             for info_key, info_values in path.get('infos', {}).items():
-                if info_key is not 'success':
+                if not info_key in set(['success', 'near_object', 'grasp_reward', 'grasp_success', 'in_place_reward', 'obj_to_target', 'unscaled_reward']):
                     continue
                 info_values = np.array(info_values)
                 

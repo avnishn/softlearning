@@ -52,7 +52,7 @@ setup(
         'scipy>=1.4.1',
         'tensorflow>=2.2.0',
         'tensorflow-probability>=0.10.0',
-        f'metaworld @ https://git@api.github.com/repos/rlworkgroup/metaworld/tarball/9b773d0db1e7af65466c362fdb9603aaffe5b978'
+        f'metaworld @ https://git@api.github.com/repos/rlworkgroup/metaworld/tarball/206b0263409147aa7aa572d501f74baa0c04c34b'
     ),
     zip_safe=True,
     license='MIT'

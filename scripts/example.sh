@@ -1,9 +1,10 @@
 softlearning run_example_local examples.development \
-    --algorithm SAC
+    --algorithm SAC \
     --universe gym \
-    --domain push-v1 \
-    --task v1 \
+    --domain push \
+    --task v2 \
     --exp-name metaworld-example \
-    --checkpoint-frequency=5 \
+    --checkpoint-frequency=100 \
     --gpus=1 \
-    --trial-gpus=1
+    --trial-gpus=1 \
+    --server-port 4400

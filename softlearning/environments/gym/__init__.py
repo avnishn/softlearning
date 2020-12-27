@@ -63,11 +63,11 @@ MUJOCO_ENVIRONMENT_SPECS = [
     },
 ]
 
-from metaworld.envs.mujoco.env_dict import ALL_V1_ENVIRONMENTS
-for idx in ALL_V1_ENVIRONMENTS:
-    env = ALL_V1_ENVIRONMENTS[idx]
+from metaworld.envs.mujoco.env_dict import ALL_V2_ENVIRONMENTS
+for idx in ALL_V2_ENVIRONMENTS:
+    env = ALL_V2_ENVIRONMENTS[idx]
     temp = {'id': idx,
-            'entry_point': f'metaworld.envs.mujoco.sawyer_xyz:{env.__name__}'}
+            'entry_point': f'metaworld.envs.mujoco.sawyer_xyz.v2:{env.__name__}'}
     MUJOCO_ENVIRONMENT_SPECS.append(temp)
 
 

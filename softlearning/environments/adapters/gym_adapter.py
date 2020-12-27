@@ -11,7 +11,7 @@ from .softlearning_env import SoftlearningEnv
 from softlearning.environments.gym import register_environments
 from softlearning.environments.gym.wrappers import RescaleObservation
 from softlearning.utils.gym import is_continuous_space
-from metaworld.envs.mujoco.sawyer_xyz import *
+from metaworld.envs.mujoco.sawyer_xyz.v2 import *
 
 def parse_domain_task(gym_id):
     domain_task_parts = gym_id.split('-')
@@ -66,7 +66,6 @@ class GymAdapter(SoftlearningEnv):
 
         super(GymAdapter, self).__init__(
             domain, task, *args, goal_keys=goal_keys, **kwargs)
-
         if env is None:
             assert (domain is not None and task is not None), (domain, task)
             try:
@@ -76,9 +75,6 @@ class GymAdapter(SoftlearningEnv):
                 env._partially_observable = False
                 env._freeze_rand_vec = False
                 env._set_task_called = True
-                special = {'push-v1' : "push", 'reach-v1' : "reach", "pick-place-v1": "pick_place"}
-                if env_id in special:
-                    env._set_task_inner(task_type=special[env_id])
                 env.reset()
                 env._freeze_rand_vec = True
             except gym.error.UnregisteredEnv:
